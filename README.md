@@ -24,7 +24,7 @@ To stay up to date with this repo, clone it and link the folder instead of copyi
 ln -s "$(pwd)/skills/butterfly-effect" ~/.claude/skills/butterfly-effect
 
 # Windows (PowerShell)
-New-Item -ItemType Junction -Path "$HOME\.claude\skillsutterfly-effect" -Target "$PWD\skillsutterfly-effect"
+New-Item -ItemType Junction -Path "$HOME\.claude\skills\butterfly-effect" -Target "$PWD\skills\butterfly-effect"
 ```
 
 The skill is pinned to the `opus` model (`model:` line in the frontmatter); remove that line to use your session's model.
