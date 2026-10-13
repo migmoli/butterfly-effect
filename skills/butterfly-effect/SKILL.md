@@ -48,6 +48,8 @@ List file by file what will be modified (and what is deliberately left alone, wi
 Edit every listed place, skipping none. Keep the style and tone of the surrounding text (formal/informal address, capitalization, punctuation). Rename files/folders too if needed.
 
 - **Tests expecting the old value**: update the expectation only when the change is intended, and list every modified expectation in the report (test name, old expected → new expected) so the user can validate it. Never weaken or delete a test to make it pass; if a test fails for another reason, report it instead.
+- **Claude's memory**: check the project's memory files (`~/.claude/projects/<project>/memory/`, `MEMORY.md`, CLAUDE.md) for facts the change made false (lists, names, counts, rules). Correct the fact in place, keep dated/history notes as they are, and list each memory file touched in the report. In check mode, list them only.
+- **Regression tests**: for each missed propagation fixed that no existing test covers, propose a test (name + what it asserts) in the report. Do not write it unless the user asks.
 - **Project conventions**: if the project has them, follow them after propagating (version bump, changelog entry, generated files to rebuild, docs index). Look at recent history to see how it is usually done; don't invent a convention the project doesn't have.
 
 ## 5. Verify (mandatory)
