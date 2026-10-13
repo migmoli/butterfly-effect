@@ -56,6 +56,13 @@ Edit every listed place, skipping none. Keep the style and tone of the surroundi
 - Re-read places where text changed for consistency (grammar, agreement, gender, plurals).
 
 ## 6. Short report
+Split the findings into two separately numbered groups, and never mix them:
+- **Missed propagation (to fix)**: the change is clear and one place did not follow it. Only one correct fix exists. In normal mode these are fixed; in check mode they are listed.
+- **Decisions needed**: a consequence of the change where several answers are valid, or that alters data, money, counts or business rules (e.g. include or exclude an item from a total, adjust a baseline). Never fix these on your own, in any mode: state the options and their effect, then ask.
+
+Counts in the summary line must match the lists exactly (recount before sending). A missing test is its own line, not counted as a missed propagation.
+
+Then:
 - Number of files modified and a grouped list (code / texts / docs / config / tests).
 - Exceptions left and why.
 - Build/test result.
