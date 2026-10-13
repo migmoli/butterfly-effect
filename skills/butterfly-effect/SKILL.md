@@ -51,3 +51,11 @@ Lister fichier par fichier ce qui sera modifié (et ce qui sera volontairement l
 - Ne pas modifier l'historique (changelog passé, migrations déjà appliquées, git) sauf demande explicite.
 - En cas de doute sur un endroit, le signaler plutôt que le modifier en silence.
 
+
+## Git (si le projet est un dépôt)
+- **Avant** : `git status`. Si des modifs non commitées sans rapport existent, le signaler pour ne pas les mélanger avec la propagation (proposer un commit ou un `git stash`, ne jamais le faire sans accord).
+- **Pendant** : `git diff` / `git log -5 --stat` pour retrouver les dernières modifications (étape 0) ; `git grep` pour la cartographie (respecte .gitignore, rapide).
+- **Après** : `git diff --stat` pour résumer ce qui a été propagé et vérifier qu'aucun fichier inattendu n'a bougé.
+- **Commit** : proposer un message clair (`Propagation : ANCIEN → NOUVEAU`) mais ne commiter que si l'utilisateur le demande. Ne jamais push, reset --hard, rebase ni réécrire l'historique sans demande explicite.
+- **Retour arrière** : en cas de problème, indiquer comment annuler (`git restore <fichier>` ou `git diff` pour relire), sans l'exécuter seul.
+- **Pas de dépôt** : suggérer `git init` pour que le prochain check soit plus précis.
