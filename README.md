@@ -1,24 +1,24 @@
 # butterfly-effect
 
-Skill Claude Code qui propage un changement **partout** dans un projet : code, textes, traductions, docs, config, tests.
+A Claude Code skill that propagates a change **everywhere** in a project: code, texts, translations, docs, config, tests.
 
-## Ce qu'il fait
-- Cartographie toutes les occurrences (variantes de casse, pluriels, textes UI, i18n, docs, config, tests).
-- Montre le plan avant d'éditer, applique partout, puis re-vérifie qu'il ne reste aucun ancien terme.
-- Lance build / lint / tests et rend un rapport court.
-- **Sans argument**, il retrouve seul les dernières modifications (conversation, `git diff`, ou fichiers récents) et vérifie leur propagation.
+## What it does
+- Maps every occurrence (case variants, plurals, UI texts, i18n, docs, config, tests).
+- Shows the plan before editing, applies everywhere, then re-checks that no old term remains.
+- Runs build / lint / tests and returns a short report.
+- **With no argument**, it finds the latest modifications on its own (conversation, `git diff`, or recent files) and checks their propagation.
 
-## Installation
-Copier le dossier `skills/butterfly-effect` dans `~/.claude/skills/` (global) ou `.claude/skills/` (projet).
+## Install
+Copy `skills/butterfly-effect` into `~/.claude/skills/` (global) or `.claude/skills/` (project).
 
-## Utilisation
+## Usage
 ```
-/butterfly-effect "Panier" → "Cart"
+/butterfly-effect "Basket" → "Cart"
 /butterfly-effect
 ```
 
-Pour un lancement quasi automatique, ajouter dans `~/.claude/CLAUDE.md` :
-> Après tout renommage ou changement de texte, de valeur ou de règle, invoque le skill `butterfly-effect`.
+For near-automatic triggering, add this to `~/.claude/CLAUDE.md`:
+> After any rename or change of a text, value or rule, invoke the `butterfly-effect` skill.
 
-## Licence
+## License
 MIT

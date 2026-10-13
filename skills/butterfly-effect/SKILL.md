@@ -1,61 +1,60 @@
-﻿---
+---
 name: butterfly-effect
-description: Propager un changement PARTOUT dans le projet (code, textes, docs, config, tests, traductions). À utiliser dès qu'on renomme, change une valeur, un texte, un prix, un nom, une règle, une couleur, une URL, ou qu'on modifie un comportement qui peut exister à plusieurs endroits. Sans argument, vérifie et corrige automatiquement les dernières modifications.
+description: Propagate a change EVERYWHERE in the project (code, texts, docs, config, tests, translations). Use whenever something is renamed or a name, text, value, price, rule, color, URL or behavior changes and may exist in several places. With no argument, automatically checks and fixes the most recent modifications.
 ---
 
-# Butterfly effect — un changement, zéro oubli
+# Butterfly effect — one change, nothing forgotten
 
-Objectif : quand quelque chose change, TOUT ce qui en dépend change aussi, dans tout le projet. Ne jamais s'arrêter au premier fichier trouvé.
+Goal: when something changes, EVERYTHING that depends on it changes too, across the whole project. Never stop at the first file found.
 
-## 0. Sans argument : détecter les dernières modifications
-Si l'utilisateur lance le skill sans préciser le changement, ne PAS lui demander : le retrouver soi-même, dans cet ordre :
-1. **Conversation en cours** : les éditions faites dans cette session (fichiers touchés, ancien → nouveau).
-2. **Git** (si dépôt) : `git status` + `git diff` (non commité) puis `git diff HEAD~1` / `git log -5 --stat` si rien de non commité.
-3. **Pas de git** : fichiers du projet triés par date de modification (les plus récents, ex. dernières heures), en comparant avec le contenu environnant pour déduire ce qui a changé.
+## 0. No argument: detect the latest modifications
+If the user runs the skill without specifying the change, do NOT ask: find it yourself, in this order:
+1. **Current conversation**: edits made in this session (files touched, old → new).
+2. **Git** (if a repo): `git status` + `git diff` (uncommitted), then `git diff HEAD~1` / `git log -5 --stat` if nothing is uncommitted.
+3. **No git**: project files sorted by modification time (most recent, e.g. last few hours), comparing with surrounding content to infer what changed.
 
-Pour chaque modification trouvée, en déduire ANCIEN → NOUVEAU (nom, texte, valeur, règle, comportement), puis traiter chacune comme un changement à propager (étapes 2 à 6). Faire un check général : ne pas se limiter à un seul changement, couvrir tous les récents. Si une modification est vraiment ambiguë (impossible de déduire l'intention), la lister et demander seulement pour celle-là.
+For each modification found, infer OLD → NEW (name, text, value, rule, behavior), then treat each as a change to propagate (steps 2 to 6). Do a general check: don't stop at a single change, cover all recent ones. If a modification is truly ambiguous (intent can't be inferred), list it and ask only about that one.
 
-## 1. Définir le changement
-Écrire en une ligne : ANCIEN → NOUVEAU (nom, texte, valeur, comportement, règle). Si ambigu, poser une question avant de toucher quoi que ce soit.
+## 1. Define the change
+Write one line: OLD → NEW (name, text, value, behavior, rule). If ambiguous, ask before touching anything.
 
-## 2. Cartographier AVANT d'éditer
-Chercher dans TOUT le projet (hors node_modules, .git, dist, build, lockfiles) :
-- **Variantes de forme** : camelCase, PascalCase, snake_case, kebab-case, MAJUSCULES, pluriel/singulier, avec/sans accents, avec/sans espaces ou tirets.
-- **Textes** : libellés UI, titres, boutons, messages d'erreur, placeholders, emails, notifications, meta/SEO, alt, aria-label, README, docs, changelog, commentaires, CLAUDE.md.
-- **Traductions** : tous les fichiers de langues (i18n/locales/.json/.po/.arb/.strings), toutes les langues, pas seulement le français.
-- **Fichiers non-code** : config, .env.example, JSON/YAML/TOML, SQL/migrations, seeds, fixtures, mocks, snapshots, CI/CD, Docker, scripts, manifests.
-- **Références indirectes** : imports, routes/URLs, clés de config, noms de fichiers/dossiers, chaînes construites dynamiquement, constantes dupliquées, types/interfaces/schémas.
-- **Tests** : unitaires, e2e, snapshots, données de test.
-- **Valeurs dérivées** : si une valeur change (prix, limite, version, date), chercher aussi ses équivalents calculés ou écrits en toutes lettres.
-- **Concepts sans le mot exact** : chercher aussi par sens (synonymes, description du comportement), pas seulement par le terme littéral.
+## 2. Map BEFORE editing
+Search the ENTIRE project (excluding node_modules, .git, dist, build, lockfiles):
+- **Form variants**: camelCase, PascalCase, snake_case, kebab-case, UPPERCASE, plural/singular, with/without accents, with/without spaces or hyphens.
+- **Texts**: UI labels, titles, buttons, error messages, placeholders, emails, notifications, meta/SEO, alt, aria-label, README, docs, changelog, comments, CLAUDE.md.
+- **Translations**: all language files (i18n/locales/.json/.po/.arb/.strings), every language, not just one.
+- **Non-code files**: config, .env.example, JSON/YAML/TOML, SQL/migrations, seeds, fixtures, mocks, snapshots, CI/CD, Docker, scripts, manifests.
+- **Indirect references**: imports, routes/URLs, config keys, file/folder names, dynamically built strings, duplicated constants, types/interfaces/schemas.
+- **Tests**: unit, e2e, snapshots, test data.
+- **Derived values**: if a value changes (price, limit, version, date), also look for its computed equivalents or spelled-out forms.
+- **Concepts without the exact word**: also search by meaning (synonyms, description of the behavior), not just the literal term.
 
-## 3. Montrer le plan
-Lister fichier par fichier ce qui sera modifié (et ce qui sera volontairement laissé, avec la raison : historique, changelog passé, citation, données utilisateur). Si > 20 fichiers ou changement destructif, demander confirmation.
+## 3. Show the plan
+List file by file what will be modified (and what is deliberately left alone, with the reason: history, past changelog, quotes, user data). If > 20 files or a destructive change, ask for confirmation.
 
-## 4. Appliquer partout
-Éditer tous les endroits listés, sans en sauter. Garder le style et le ton du texte environnant (tutoiement/vouvoiement, majuscules, ponctuation). Renommer aussi fichiers/dossiers si nécessaire.
+## 4. Apply everywhere
+Edit every listed place, skipping none. Keep the style and tone of the surrounding text (formal/informal address, capitalization, punctuation). Rename files/folders too if needed.
 
-## 5. Vérifier (obligatoire)
-- Re-grep l'ANCIEN terme dans toutes ses variantes : il ne doit plus rester que les exceptions justifiées.
-- Lancer build / typecheck / lint / tests si disponibles et corriger les cassures.
-- Relire les endroits où du texte a changé pour la cohérence (grammaire, accords, genre, pluriels).
+## 5. Verify (mandatory)
+- Re-grep the OLD term in all its variants: only justified exceptions may remain.
+- Run build / typecheck / lint / tests if available and fix breakage.
+- Re-read places where text changed for consistency (grammar, agreement, gender, plurals).
 
-## 6. Rapport court
-- Nombre de fichiers modifiés et liste groupée (code / textes / docs / config / tests).
-- Exceptions laissées et pourquoi.
-- Résultat build/tests.
-- Risques restants (ce qu'un grep ne peut pas voir : données en base, services externes, caches, déploiements).
+## 6. Short report
+- Number of files modified and a grouped list (code / texts / docs / config / tests).
+- Exceptions left and why.
+- Build/test result.
+- Remaining risks (what grep can't see: database data, external services, caches, deployments).
 
-## Règles
-- Ne jamais déclarer « fait partout » sans l'étape 5.
-- Ne pas modifier l'historique (changelog passé, migrations déjà appliquées, git) sauf demande explicite.
-- En cas de doute sur un endroit, le signaler plutôt que le modifier en silence.
+## Rules
+- Never declare "done everywhere" without step 5.
+- Don't modify history (past changelog, already-applied migrations, git) unless explicitly asked.
+- When in doubt about a place, flag it rather than silently modifying it.
 
-
-## Git (si le projet est un dépôt)
-- **Avant** : `git status`. Si des modifs non commitées sans rapport existent, le signaler pour ne pas les mélanger avec la propagation (proposer un commit ou un `git stash`, ne jamais le faire sans accord).
-- **Pendant** : `git diff` / `git log -5 --stat` pour retrouver les dernières modifications (étape 0) ; `git grep` pour la cartographie (respecte .gitignore, rapide).
-- **Après** : `git diff --stat` pour résumer ce qui a été propagé et vérifier qu'aucun fichier inattendu n'a bougé.
-- **Commit** : proposer un message clair (`Propagation : ANCIEN → NOUVEAU`) mais ne commiter que si l'utilisateur le demande. Ne jamais push, reset --hard, rebase ni réécrire l'historique sans demande explicite.
-- **Retour arrière** : en cas de problème, indiquer comment annuler (`git restore <fichier>` ou `git diff` pour relire), sans l'exécuter seul.
-- **Pas de dépôt** : suggérer `git init` pour que le prochain check soit plus précis.
+## Git (if the project is a repo)
+- **Before**: `git status`. If unrelated uncommitted changes exist, flag them so they aren't mixed with the propagation (suggest a commit or `git stash`, never do it without consent).
+- **During**: `git diff` / `git log -5 --stat` to find the latest modifications (step 0); `git grep` for mapping (respects .gitignore, fast).
+- **After**: `git diff --stat` to summarize what was propagated and check that no unexpected file changed.
+- **Commit**: suggest a clear message (`Propagate: OLD → NEW`) but only commit if the user asks. Never push, reset --hard, rebase or rewrite history without an explicit request.
+- **Rollback**: if something goes wrong, explain how to undo (`git restore <file>` or `git diff` to review), without running it on your own.
+- **No repo**: suggest `git init` so the next check is more precise.
