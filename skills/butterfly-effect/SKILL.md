@@ -1,5 +1,6 @@
 ---
 name: butterfly-effect
+model: opus
 description: Propagate a change EVERYWHERE in the project (code, texts, docs, config, tests, translations). Use whenever something is renamed or a name, text, value, price, rule, color, URL or behavior changes and may exist in several places. With no argument, automatically checks and fixes the most recent modifications.
 ---
 
