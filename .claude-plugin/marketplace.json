@@ -1,0 +1,15 @@
+{
+  "name": "migmoli",
+  "description": "Claude Code skills by migmoli.",
+  "owner": {
+    "name": "migmoli",
+    "url": "https://github.com/migmoli"
+  },
+  "plugins": [
+    {
+      "name": "butterfly-effect",
+      "source": "./",
+      "description": "Propagate a change everywhere in a project: code, texts, translations, docs, config, tests."
+    }
+  ]
+}

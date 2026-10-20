@@ -1,4 +1,6 @@
-# butterfly-effect
+# butterfly-effect 🦋
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) ![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)
 
 A Claude Code skill that propagates a change **everywhere** in a project — code, texts, translations, docs, config, tests — and tells you what it could not see.
 
@@ -71,9 +73,15 @@ To have Claude run it on its own, add this to `~/.claude/CLAUDE.md`:
 
 ## Install
 
-Copy `skills/butterfly-effect` into `~/.claude/skills/` (all your projects) or `.claude/skills/` (one project), then start a new session.
+In Claude Code (2.1.275 or later):
 
-To stay up to date with this repo, clone it and link the folder instead of copying:
+```
+/plugin install butterfly-effect --marketplace migmoli/butterfly-effect
+```
+
+Then start a new session. Updates come through `/plugin`.
+
+**Manual install.** Copy `skills/butterfly-effect` into `~/.claude/skills/` (all your projects) or `.claude/skills/` (one project). To stay up to date with this repo, clone it and link the folder instead of copying:
 
 ```
 # macOS / Linux
