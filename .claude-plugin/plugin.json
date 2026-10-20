@@ -1,10 +1,20 @@
 {
   "name": "butterfly-effect",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Propagate a change everywhere in a project: code, texts, translations, docs, config, tests. Includes a check mode that reports misses without editing.",
-  "author": { "name": "migmoli", "url": "https://github.com/migmoli" },
+  "author": {
+    "name": "migmoli",
+    "url": "https://github.com/migmoli"
+  },
   "homepage": "https://github.com/migmoli/butterfly-effect",
   "repository": "https://github.com/migmoli/butterfly-effect",
   "license": "MIT",
-  "keywords": ["refactoring", "rename", "propagation", "i18n", "consistency", "skill"]
+  "keywords": [
+    "refactoring",
+    "rename",
+    "propagation",
+    "i18n",
+    "consistency",
+    "skill"
+  ]
 }
