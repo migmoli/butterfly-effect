@@ -1,6 +1,6 @@
 ---
 name: butterfly-effect
-argument-hint: "[check] [OLD → NEW]"
+argument-hint: "[check] [OLD → NEW] [lang:xx]"
 description: Propagate a change EVERYWHERE in the project (code, texts, docs, config, tests, translations). Use whenever something is renamed or a name, text, value, price, rule, color, URL or behavior changes and may exist in several places. With no argument, automatically checks and fixes the most recent modifications. Asked only to check (check, --check, vérifie, what did I miss), it reports the misses without editing anything.
 ---
 
@@ -8,7 +8,7 @@ description: Propagate a change EVERYWHERE in the project (code, texts, docs, co
 
 Goal: when something changes, EVERYTHING that depends on it changes too, across the whole project. Never stop at the first file found.
 
-**Check mode (report only).** Use it when the argument or the user's request asks only to check, in any form or language (`check`, `--check`, `vérifie`, "dry run", "did I miss anything?"), alone (detect the changes as in step 0) or followed by a change (`check Basket → Cart`). No argument, or a change named alone (`Basket → Cart`), means normal mode. Run every step, but wherever a step says edit, fix, correct, rename, update or commit, write a report line instead, and skip the step 3 confirmation. Change NOTHING, inside or outside the repo: no file, memory, rename or commit, and no build or test run (they write files and can have side effects); a typecheck or lint only in a form that writes nothing (`tsc --noEmit`, lint without `--fix`). Report as in step 6, each miss as file:line, what is there, what it should be.
+**Check mode (report only).** Use it when the argument or the user's request asks only to check, in any form or language (`check`, `--check`, `vérifie`, "dry run", "did I miss anything?"), alone (detect the changes as in step 0) or followed by a change (`check Basket → Cart`). No argument, or a change named alone (`Basket → Cart`), means normal mode; a language option (`lang:es`) never counts as a change. Run every step, but wherever a step says edit, fix, correct, rename, update or commit, write a report line instead, and skip the step 3 confirmation. Change NOTHING, inside or outside the repo: no file, memory, rename or commit, and no build or test run (they write files and can have side effects); a typecheck or lint only in a form that writes nothing (`tsc --noEmit`, lint without `--fix`). Report as in step 6, each miss as file:line, what is there, what it should be.
 
 ## 0. No argument: detect the latest modifications
 If the user runs the skill without specifying the change, do NOT ask: find it yourself, in this order:
@@ -56,6 +56,8 @@ Edit every listed place, skipping none. Keep the style and tone of the surroundi
 - Re-read places where text changed for consistency (grammar, agreement, gender, plurals).
 
 ## 6. Report
+**Language**: write the report in the language the user writes in, unless they ask for another (`in Spanish`, `lang:de`) or set one in CLAUDE.md. Translate your own words and the fixed labels (group names, checklist items); keep file paths, code, quoted texts and OLD/NEW terms exactly as they are.
+
 Open with what was checked: one line per change (OLD → NEW, source: named by the user / conversation / git / file dates), plus any scope not searched or command not run, so a gap is visible.
 
 Split the findings into two separately numbered groups, and never mix them:

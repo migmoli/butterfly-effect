@@ -1,6 +1,6 @@
 {
   "name": "butterfly-effect",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Propagate a change everywhere in a project: code, texts, translations, docs, config, tests. Includes a check mode that reports misses without editing.",
   "author": {
     "name": "migmoli",

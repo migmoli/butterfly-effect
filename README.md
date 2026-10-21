@@ -61,6 +61,7 @@ Neither of the two misses contains the old word: grep alone would not have found
 - **Answers an outside-the-repo checklist** point by point — database, stored data, caches, running service, sent messages, scheduled jobs, outside services (payment prices, hosted email templates, old URLs), environment — instead of "nothing external".
 - **Keeps Claude's memory honest.** Corrects facts the change made false in the project's memory files, reports each edit old → new, and only flags the global `~/.claude/CLAUDE.md`.
 - **Handles tests carefully.** Updates expectations that targeted the old value and lists each one for you to validate; proposes a regression test for fixes no test covers. Never weakens a test to make it pass.
+- **Speaks your language.** The report follows the language you write in, or the one you choose.
 - **Respects git.** Never commits, pushes or rewrites history unless you ask.
 
 ## Usage
@@ -72,6 +73,8 @@ Neither of the two misses contains the old word: grep alone would not have found
 ```
 
 Check mode also answers to `--check`, `vérifie` or "what did I miss?", alone or followed by a change (`check Basket → Cart`).
+
+The report comes in the language you write in. To choose another one, add it to the command (`/butterfly-effect check lang:es`, or "in Spanish") or set it once in your `CLAUDE.md` ("Write butterfly-effect reports in German"). File paths, code and quoted texts are never translated.
 
 With no argument, it finds the recent changes itself: the edits of the current conversation, then `git diff` and recent commits, then recently modified files if the project is not a git repo.
 
